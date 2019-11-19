@@ -31,6 +31,7 @@ namespace UserMaintance
             listBox1.DisplayMember = "FullName";
 
             button2.Text = Resource1.SaveFile;
+            button3.Text = Resource1.Delete;
         
         }
 
@@ -62,6 +63,25 @@ namespace UserMaintance
                     sw.Write(s.FullName);
                     sw.WriteLine();
                 }
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Guid oID = (Guid)(listBox1.SelectedValue);
+                var od = from x in users
+                         where x.ID == oID
+                         select x;
+                users.Remove(od.FirstOrDefault());
+                
+                
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Nem megy!");
             }
         }
     }
